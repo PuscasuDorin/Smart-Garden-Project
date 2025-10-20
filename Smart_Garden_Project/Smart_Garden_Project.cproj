@@ -126,6 +126,9 @@
     <Compile Include="include\ADC.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\LightSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\PWM.h">
       <SubType>compile</SubType>
     </Compile>
@@ -133,6 +136,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ADC.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\LightSensor.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\main.c">
