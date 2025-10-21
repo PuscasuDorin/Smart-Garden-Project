@@ -4,8 +4,8 @@
 #include <math.h>
 
 static uint8_t ADC_channel = 0;
-static uint32_t R_val = 10 * 1000;
-static float V_ref_val = 3.3f;
+static uint32_t R_val = 9800; //ohm
+static float V_ref_val = 5.0f; //V
 
 void LightSensor_init(uint8_t ADC_channel_param, uint32_t R_val_param, float V_ref_val_param){
 	ADC_channel = ADC_channel_param;

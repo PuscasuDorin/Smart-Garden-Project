@@ -19,7 +19,7 @@ int main(void)
 {
 	ADC_init();
 	PWM_init();
-	LightSensor_init(1,9800,3.3f);
+	LightSensor_init(1,9800,5.0f);
 	UART_Init(9600);
     while (1) 
     {
