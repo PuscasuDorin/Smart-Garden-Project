@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include "LightSensor.h"
 #include "ADC.h"
+#include <math.h>
 
 static uint8_t ADC_channel = 0;
 static uint32_t R_val = 10 * 1000;
@@ -14,14 +15,28 @@ void LightSensor_init(uint8_t ADC_channel_param, uint32_t R_val_param, float V_r
 	ADC_init();
 }
 
-uint32_t read_LightSensor(void){
+float read_LightSensor(void){
 	float adc_val = ADC_read_voltage(ADC_channel, V_ref_val);
 	
 	if (adc_val < 0.001f){
-		 return 0;
+		 return 0.0f;
 	}
 	else{
-		uint32_t sensor_val = (R_val*(V_ref_val-adc_val))/adc_val;
-		return (sensor_val);
+		float R_light_sensor = (R_val*(V_ref_val-adc_val))/adc_val;
+		return R_light_sensor;
+	}
+}
+
+float read_LightSensor_LUX(void){
+	
+	float R_light_sensor = read_LightSensor();
+
+	if (R_light_sensor < 0.001f) {
+		return 0.0f;
+	}
+	else
+	{
+	  float lux = powf(12000000.0f / read_LightSensor(), 0.965f);  
+	  return lux;
 	}
 }
