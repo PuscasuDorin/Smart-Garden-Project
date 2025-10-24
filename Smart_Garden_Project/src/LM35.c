@@ -4,6 +4,7 @@
 	
 	static uint8_t LM35_channel = 0;
 	static float V_ref = 5.0f; //V
+	static float calib_val = 0.0f; //calibration value
 	
 	void LM35_init(uint8_t channel, float V_ref_param){
 		LM35_channel = channel;
@@ -15,6 +16,6 @@
 	float read_LM35_Temp(void){
 		float temperature = ADC_read_voltage(LM35_channel,V_ref) * 100.0f;
 		
-		return temperature;
+		return temperature + calib_val;
 	}
 	

@@ -34,9 +34,19 @@ float read_LightSensor_LUX(void){
 	if (R_light_sensor < 0.001f) {
 		return 0.0f;
 	}
-	else
-	{
+	else{
 	  float lux = powf(12000000.0f / read_LightSensor(), 0.965f);  
 	  return lux;
+	}
+}
+
+float read_LightSensor_Percentages(void){
+	float adc_val = ADC_read_voltage(ADC_channel, V_ref);
+	if (adc_val < 0.001f){
+		return 0.0f;
+	}
+	else{
+		float percentages = (adc_val / V_ref) * 100;
+		return percentages;
 	}
 }

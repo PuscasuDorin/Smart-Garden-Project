@@ -7,5 +7,7 @@
 	float read_LightSensor(void);
 
 	float read_LightSensor_LUX(void);
+	
+	float read_LightSensor_Percentages(void);
 
 #endif /* LIGHTSENSOR_H_ */
