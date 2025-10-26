@@ -25,4 +25,10 @@ void I2C_Write(uint8_t data){
 	while (!(TWCR & (1<<TWINT)));
 }
 
-
+void I2C_LCD_Write(uint8_t lcd_address, uint8_t control_byte ,uint8_t data){
+	I2C_Start();
+	I2C_Write(lcd_address << 1);
+	I2C_Write(control_byte);
+	I2C_Write(data);
+	I2C_Stop();
+}
