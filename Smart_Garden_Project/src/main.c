@@ -8,12 +8,13 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdio.h>
 #include "PWM.h"
 #include "ADC.h"
 #include "UART.h"
 #include "LightSensor.h"
 #include "LM35.h"
-#include <stdio.h>
+#include "I2C.h"
 
 #define led_port &PORTE
 #define led_pin	PE4
