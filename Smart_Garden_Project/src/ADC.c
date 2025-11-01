@@ -1,6 +1,9 @@
+#define F_CPU 16000000UL
 
 #include <avr/io.h>
 #include "ADC.h"
+#include <util/delay.h>
+
 
 void ADC_init(void){
 	
@@ -10,41 +13,15 @@ void ADC_init(void){
 }
 
 uint16_t ADC_read(uint8_t channel){
-	if(channel >= 0 && channel <= 7){
-		ADCSRB &= ~(1<<MUX5);
-	}
-	if(channel > 7 && channel <= 15){
-		ADCSRB |= (1<<MUX5);
-		
-		switch (channel){
-			case 8:
-				channel = 0;
-				break;
-			case 9:
-				channel = 1;
-				break;
-			case 10:
-				channel = 2;
-				break;
-			case 11:
-				channel = 3;
-				break;
-			case 12:
-				channel = 4;
-				break;
-			case 13:
-				channel = 5;
-				break;
-			case 14:
-				channel = 6;
-				break;
-			case 15:
-				channel = 7;
-				break;
-		}
-	}
-	ADMUX |= (ADMUX & 0xF0) | (channel & 0x0F);
 
+	if (channel < 8) {
+		ADCSRB &= ~(1 << MUX5);
+		} else {
+		ADCSRB |= (1 << MUX5);
+		channel -= 8;
+	}
+	ADMUX = (1<<REFS0) | (channel & 0x0F);
+	_delay_us(50);
 	ADCSRA |= (1<<ADSC);
 	
 	while(ADCSRA & (1<<ADSC));
