@@ -44,6 +44,7 @@ int main(void)
 		set_LED_Brightness(led_port, led_pin,150);
 		_delay_ms(500);
 		*/
+		
 		float number =  read_LM35_Temp();
 		char str[6];
 		
@@ -62,6 +63,13 @@ int main(void)
 		UART_TransmitByte('\n');
 		UART_TransmitByte('\r');
 		_delay_ms(1000);
+		
+		UART_TransmitString("Start pump...");
+		UART_TransmitByte('\n');
+		UART_TransmitByte('\r');
+		set_PumpSpeed(led_port,led_pin, 100);
+		
+		//_delay_ms(1000);
 		
 		
 		
