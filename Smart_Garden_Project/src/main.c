@@ -23,7 +23,7 @@ int main(void)
 {
 	//ADC_init();
 	//PWM_init();
-	LM35_init(15,5);
+	LM35_init(11,5);
 	//LightSensor_init(1,9800,5.0f);
 	UART_Init(9600);
 	UART_TransmitString("Starting...");
@@ -44,13 +44,26 @@ int main(void)
 		set_LED_Brightness(led_port, led_pin,150);
 		_delay_ms(500);
 		*/
-		float number = read_LM35_Temp();
+		float number =  read_LM35_Temp();
 		char str[6];
+		
 		sprintf(str, "%.2f", number);
+		UART_TransmitString("Temp:");
 		UART_TransmitString(str);
 		UART_TransmitByte('\n');
 		UART_TransmitByte('\r');
 		_delay_ms(1000);
+		
+		float num =  ADC_read_voltage(4,5);
+		char strr[6];
+		sprintf(strr, "%.2f", num);
+		UART_TransmitString("Water:");
+		UART_TransmitString(strr);
+		UART_TransmitByte('\n');
+		UART_TransmitByte('\r');
+		_delay_ms(1000);
+		
+		
 		
 		
     }
