@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include "PWM.h"
 #include <stdbool.h>
+#include "UART.h"
 
 static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_value, bool init);
 
@@ -105,6 +106,10 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 			break;
 			
 		case 2:
+			UART_Init(9600);
+			UART_TransmitString("Error: PG5 is a timer-dedicated pin!\n\r");
+			while(1);
+		/*
 			if(init){
 				TCCR0A = (1<<COM0A1) | (1<<WGM01) | (1<<WGM00);
 				TCCR0B = (1<<CS01);
@@ -119,6 +124,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR0A |= (1<<COM0B1);
 				OCR0B = pwm_value;
 			}
+		*/
 			break;
 			
 		case 3:
@@ -258,6 +264,10 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 			break;
 			
 		case 11:
+			UART_Init(9600);
+			UART_TransmitString("Error: PB7 is a timer-dedicated pin!\n\r");
+			while(1);
+		/*
 			if(init){
 				TCCR0A = (1<<COM0A1) | (1<<WGM01) | (1<<WGM00); //COM->Non-Inverting Mode and WGM->fast PWM Mode
 				TCCR0B = (1<<CS01); //CS->Clock Prescaler(clk/8)
@@ -272,6 +282,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR0A |= (1<<COM0A1);
 				OCR0A = pwm_value;
 			}
+		*/
 			break;
 	}
 }
