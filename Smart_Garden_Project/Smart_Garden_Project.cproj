@@ -125,7 +125,19 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Core\inc\config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\inc\system.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\src\config.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Core\src\main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\src\system.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Drivers\inc\ADC.h">
