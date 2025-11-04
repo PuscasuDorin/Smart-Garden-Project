@@ -2,6 +2,8 @@
 #ifndef SYSTEM_H_
 #define SYSTEM_H_
 
+	#include "console.h"
+	
 	//Drivers
 	#include "ADC.h"
 	#include "PWM.h"

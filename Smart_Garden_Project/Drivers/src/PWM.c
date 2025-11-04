@@ -149,7 +149,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR4A = (1<<COM4A1) | (1<<WGM40);
 				TCCR4B = (1<<CS41) | (1<<WGM42);
 				
-				DDRH = (1<<PE3);
+				DDRH = (1<<PH3);
 			}
 			if(pwm_value == 0){
 				TCCR4A &= ~(1<<COM4A1);

@@ -6,7 +6,6 @@ void Drivers_init(void){
 	ADC_init();
 	PWM_init(pump_port, pump_pin);
 	TIM_init();
-	UART_Init(UART_baud_rate);
 }
 
 void Peripherals_init(void){
@@ -14,4 +13,5 @@ void Peripherals_init(void){
 	LM35_init(temp_sensor_adc_channel,temp_sensor_V_ref);
 	I2C_Init();
 	LCD_init();
+	console_init();
 }
