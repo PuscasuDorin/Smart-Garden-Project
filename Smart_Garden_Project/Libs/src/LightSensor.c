@@ -4,12 +4,12 @@
 #include <math.h>
 
 static uint8_t ADC_channel = 0;
-static uint32_t R_val = 9800; //ohm
+static uint32_t R_ref = 9800; //ohm
 static float V_ref = 5.0f; //V
 
-void LightSensor_init(uint8_t ADC_channel_param, uint32_t R_val_param, float V_ref_param){
+void LightSensor_init(uint8_t ADC_channel_param, uint32_t R_ref_param, float V_ref_param){
 	ADC_channel = ADC_channel_param;
-	R_val = R_val_param;
+	R_ref = R_ref_param;
 	V_ref = V_ref_param;
 	
 	ADC_init();
@@ -22,7 +22,7 @@ float read_LightSensor(void){
 		 return 0.0f;
 	}
 	else{
-		float R_light_sensor = (R_val*(V_ref-adc_val))/adc_val;
+		float R_light_sensor = (R_ref*(V_ref-adc_val))/adc_val;
 		return R_light_sensor;
 	}
 }

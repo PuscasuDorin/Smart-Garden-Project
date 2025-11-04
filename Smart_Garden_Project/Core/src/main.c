@@ -9,41 +9,16 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>
-#include "PWM.h"
-#include "ADC.h"
-#include "UART.h"
-#include "LightSensor.h"
-#include "LM35.h"
-#include "I2C.h"
-
-#define led_port &PORTE
-#define led_pin	PE4
+#include "system.h"
 
 int main(void)
 {
-	//ADC_init();
-	//PWM_init();
-	LM35_init(11,5);
 	//LightSensor_init(1,9800,5.0f);
-	UART_Init(9600);
 	UART_TransmitString("Starting...");
-	PWM_init(led_port, led_pin);
+	
     while (1) 
     {
-		/*
-		set_LED_Brightness(led_port, led_pin,0);
-		_delay_ms(500);
-		set_LED_Brightness(led_port, led_pin,30);
-		_delay_ms(500);
-		set_LED_Brightness(led_port, led_pin,50);
-		_delay_ms(500);
-		set_LED_Brightness(led_port, led_pin,70);
-		_delay_ms(500);
-		set_LED_Brightness(led_port, led_pin,100);
-		_delay_ms(500);
-		set_LED_Brightness(led_port, led_pin,150);
-		_delay_ms(500);
-		*/
+		
 		
 		float number =  read_LM35_Temp();
 		char str[6];
