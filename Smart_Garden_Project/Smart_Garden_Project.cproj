@@ -171,10 +171,16 @@
     <Compile Include="Drivers\src\UART.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Libs\inc\LCD_TEST.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Libs\inc\LightSensor.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Libs\inc\LM35.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Libs\src\LCD_TEST.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Libs\src\LightSensor.c">

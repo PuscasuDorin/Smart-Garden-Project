@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include "TIM.h"
+#include <avr/interrupt.h>
 
 volatile uint32_t ms_counter = 0;
 

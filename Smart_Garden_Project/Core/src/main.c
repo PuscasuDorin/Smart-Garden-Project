@@ -14,6 +14,9 @@
 int main(void)
 {
 	//LightSensor_init(1,9800,5.0f);
+	Drivers_init();
+	Peripherals_init();
+	
 	UART_TransmitString("Starting...");
 	
     while (1) 
@@ -28,21 +31,22 @@ int main(void)
 		UART_TransmitString(str);
 		UART_TransmitByte('\n');
 		UART_TransmitByte('\r');
-		_delay_ms(1000);
+		LCD_gotoxy(0,0);
+		LCD_print("Temp:");
+		LCD_print(str);	
 		
-		float num =  ADC_read_voltage(4,5);
+		float num =  ADC_read_voltage(1,5);
 		char strr[6];
 		sprintf(strr, "%.2f", num);
 		UART_TransmitString("Water:");
 		UART_TransmitString(strr);
 		UART_TransmitByte('\n');
 		UART_TransmitByte('\r');
+		LCD_gotoxy(0,1);
+		LCD_print("Water:");
+		LCD_print(strr);
 		_delay_ms(1000);
-		
-		UART_TransmitString("Start pump...");
-		UART_TransmitByte('\n');
-		UART_TransmitByte('\r');
-		set_PumpSpeed(led_port,led_pin, 100);
+		LCD_clear();
 		
 		//_delay_ms(1000);
 		
