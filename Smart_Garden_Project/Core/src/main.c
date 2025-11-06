@@ -20,15 +20,33 @@ int main(void)
     while (1) 
     {
 		uint32_t global_time = TIM_value();
-		if(global_time % 1000 == 0){
+		
+		if(global_time % 503 == 0){
+			//0.5s for LCD refresh
+		}
+		
+		if(global_time % 29993 == 0){
+			//30s for Temperature Sensor
+		}
+		
+		if(global_time % 59993  == 0){
+			//1min for Light Sensor
+		}
+		
+		if(global_time % 3599993UL  == 0){
+			//1h for Soil Moisture Sensor
+		}
+		
+		if(global_time % 7199993UL  == 0){
+			//2h for Water Level Sensor
+		}
+		
+		/*	
 		char strr[10];
 		sprintf(strr, "%lu", global_time);
 		UART_TransmitString(strr);
 		UART_TransmitString("\n\r");
-		}
 		
-		
-	/*	
 		float number =  read_LM35_Temp();
 		char str[6];
 		
