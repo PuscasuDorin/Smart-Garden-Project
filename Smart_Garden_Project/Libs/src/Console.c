@@ -63,50 +63,55 @@ void set_mode(enum MODES mode) {
 }
 
 void UI_mode(void){
-	uint8_t ui_selection;
-	bool ui_selected = false;
-	
-	UART_TransmitString("What do you want to test? \n\r");
-	UART_TransmitString("1. LCD_TEST \n\r");
-	UART_TransmitString("2. RGB_LED_TEST \n\r");
-	UART_TransmitString("3. EXIT \n\r");
-	
-	while (!ui_selected){
-		while(!str_is_complete);
-		if(str_is_complete){
-			str_is_complete = false;
+	while(1){
+		uint8_t ui_selection;
+		bool ui_selected = false;
 		
-			if(strcmp((const char *)rx_buffer, "1") == 0){
-				ui_selection = 1;
-				ui_selected = true;
-			}
-			else if(strcmp((const char *)rx_buffer, "2") == 0){
-				ui_selection = 2;
-				ui_selected = true;
-			}
-			else if(strcmp((const char *)rx_buffer, "3") == 0){
-				return;
-			}
-			else{
-				UART_TransmitString("Invalid selection! Try again! \n\r");
+		UART_TransmitString("What do you want to test? \n\r");
+		UART_TransmitString("1. LCD_TEST \n\r");
+		UART_TransmitString("2. RGB_LED_TEST \n\r");
+		UART_TransmitString("3. BACK \n\r");
+		
+		while (!ui_selected){
+			while(!str_is_complete);
+			if(str_is_complete){
+				str_is_complete = false;
+		
+				if(strcmp((const char *)rx_buffer, "1") == 0){
+					ui_selection = 1;
+					ui_selected = true;
+				}
+				else if(strcmp((const char *)rx_buffer, "2") == 0){
+					ui_selection = 2;
+					ui_selected = true;
+				}
+				else if(strcmp((const char *)rx_buffer, "3") == 0){
+					return;
+				}
+				else{
+					UART_TransmitString("Invalid selection! Try again! \n\r");
+				}
 			}
 		}
+		switch(ui_selection) {
+			case 1:
+				UART_TransmitString("=== LCD_TEST selected ===  \n\r");
+				lcd_test_mode();
+				break;
+			case 2:
+				UART_TransmitString("=== RGB_LED_TEST selected ===  \n\r");
+				rgb_led_test_mode();
+				break;
+		}
 	}
-	switch(ui_selection) {
-		case 1:
-			UART_TransmitString("=== LCD_TEST selected ===  \n\r");
-			lcd_test_mode();
-			break;
-		case 2:
-			UART_TransmitString("=== RGB_LED_TEST selected ===  \n\r");
-			rgb_led_test_mode();
-			break;
-	}
-	
 }
 
 void Sensors_mode(void){
 	uint8_t value = 0;
+	UART_TransmitString("What do you want to do? \n\r");
+	UART_TransmitString("1. Take readings \n\r");
+	UART_TransmitString("2. BACK \n\r");
+	
 	UART_TransmitString("How many sensor readings do you want to take?\n\r");
 	UART_TransmitString(">> ");
 	while(!str_is_complete);
