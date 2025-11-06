@@ -23,7 +23,7 @@ uint32_t TIM_value(void){
 	uint32_t time;
 	
 	cli();
-	
+
 	time = ms_counter;
 	
 	sei();

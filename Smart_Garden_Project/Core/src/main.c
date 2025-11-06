@@ -10,19 +10,25 @@
 #include <util/delay.h>
 #include <stdio.h>
 #include "system.h"
+#include <avr/interrupt.h>
 
 int main(void)
 {
-	//LightSensor_init(1,9800,5.0f);
-	Drivers_init();
 	Peripherals_init();
-	
-	UART_TransmitString("Starting...");
+	Drivers_init();
 	
     while (1) 
     {
+		uint32_t global_time = TIM_value();
+		if(global_time % 1000 == 0){
+		char strr[10];
+		sprintf(strr, "%lu", global_time);
+		UART_TransmitString(strr);
+		UART_TransmitString("\n\r");
+		}
 		
 		
+	/*	
 		float number =  read_LM35_Temp();
 		char str[6];
 		
@@ -34,24 +40,24 @@ int main(void)
 		LCD_gotoxy(0,0);
 		LCD_print("Temp:");
 		LCD_print(str);	
-		
-		float num =  ADC_read_voltage(1,5);
+	
+	
+		float num =  read_LightSensor_Percentages();
 		char strr[6];
 		sprintf(strr, "%.2f", num);
-		UART_TransmitString("Water:");
+		UART_TransmitString("Light:");
 		UART_TransmitString(strr);
 		UART_TransmitByte('\n');
 		UART_TransmitByte('\r');
-		LCD_gotoxy(0,1);
-		LCD_print("Water:");
-		LCD_print(strr);
+		//LCD_gotoxy(0,1);
+		//LCD_print("Light:");
+		//LCD_print(strr);
 		_delay_ms(1000);
-		LCD_clear();
+		//LCD_clear();
 		
 		//_delay_ms(1000);
 		
-		
-		
+		*/
 		
     }
 }

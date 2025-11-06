@@ -7,6 +7,7 @@
 #include "config.h"
 #include "LCD_TEST.h"
 #include "PWM.h"
+#include <avr/interrupt.h>
 
 enum MODES{
 	MODE_NONE = 1,
@@ -29,6 +30,7 @@ void console_init(void){
 	UART_Init(UART_baud_rate);
 	UART_TransmitString("=== Smart Garden Console ===\n\r");
 	UART_TransmitString("Type 'help' to view commands.\n\r");
+	//UI_mode();
 }
 
 void start_debugging(void){
@@ -138,11 +140,12 @@ void lcd_test_mode(void){
 	if(str_is_complete){
 		str_is_complete = false;
 		
-		char lcd_temp_buffer[9];
-		
-		strncpy(lcd_temp_buffer,(const char *)rx_buffer, 9);
+		char lcd_temp_buffer[17];
+		cli();
+		strncpy(lcd_temp_buffer,(const char *)rx_buffer, 17);
 		
 		LCD_print(lcd_temp_buffer);
+		sei();
 		UART_TransmitString("LCD_TEST >> Text written to LCD!\n\r");
 	}
 }

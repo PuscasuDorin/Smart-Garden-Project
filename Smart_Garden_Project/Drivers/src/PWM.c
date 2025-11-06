@@ -76,7 +76,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR3A = (1<<COM3B1) | (1<<WGM30);
 				TCCR3B = (1<<CS31) | (1<<WGM32);
 			
-				DDRE = (1<<PE4);
+				DDRE |= (1<<PE4);
 			}		
 			if(pwm_value == 0){
 				TCCR3A &= ~(1<<COM3B1);
@@ -93,7 +93,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR3A = (1<<COM3C1) | (1<<WGM30);
 				TCCR3B = (1<<CS31) | (1<<WGM32);
 				
-				DDRE = (1<<PE5);
+				DDRE |= (1<<PE5);
 			}
 			if(pwm_value == 0){
 				TCCR3A &= ~(1<<COM3C1);
@@ -132,7 +132,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR3A = (1<<COM3A1) | (1<<WGM30);
 				TCCR3B = (1<<CS31) | (1<<WGM32);
 				
-				DDRE = (1<<PE3);
+				DDRE |= (1<<PE3);
 			}
 			if(pwm_value == 0){
 				TCCR3A &= ~(1<<COM3A1);
@@ -149,7 +149,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR4A = (1<<COM4A1) | (1<<WGM40);
 				TCCR4B = (1<<CS41) | (1<<WGM42);
 				
-				DDRH = (1<<PH3);
+				DDRH |= (1<<PH3);
 			}
 			if(pwm_value == 0){
 				TCCR4A &= ~(1<<COM4A1);
@@ -166,7 +166,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR4A = (1<<COM4B1) | (1<<WGM40);
 				TCCR4B = (1<<CS41) | (1<<WGM42);
 				
-				DDRH = (1<<PH4);
+				DDRH |= (1<<PH4);
 			}
 			if(pwm_value == 0){
 				TCCR4A &= ~(1<<COM4B1);
@@ -183,7 +183,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR4A = (1<<COM4C1) | (1<<WGM40);
 				TCCR4B = (1<<CS41) | (1<<WGM42);
 				
-				DDRH = (1<<PH5);
+				DDRH |= (1<<PH5);
 			}
 			if(pwm_value == 0){
 				TCCR4A &= ~(1<<COM4C1);
@@ -200,7 +200,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR2A = (1<<COM2B1) | (1<<WGM21) | (1<<WGM20);
 				TCCR2B = (1<<CS21);
 				
-				DDRH = (1<<PH6);
+				DDRH |= (1<<PH6);
 			}
 			if(pwm_value == 0){
 				TCCR2A &= ~(1<<COM2B1);
@@ -217,7 +217,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR2A = (1<<COM2A1) | (1<<WGM21) | (1<<WGM20);
 				TCCR2B = (1<<CS21);
 				
-				DDRB = (1<<PB4);
+				DDRB |= (1<<PB4);
 			}
 			if(pwm_value == 0){
 				TCCR2A &= ~(1<<COM2A1);
@@ -234,7 +234,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR1A = (1<<COM1A1) | (1<<WGM10);
 				TCCR1B = (1<<CS11) | (1<<WGM12);
 				
-				DDRB = (1<<PB5);
+				DDRB |= (1<<PB5);
 			}
 			if(pwm_value == 0){
 				TCCR1A &= ~(1<<COM1A1);
@@ -251,7 +251,7 @@ static void set_PWM_Pin(volatile uint8_t *pwm_port,uint8_t pwm_pin, uint8_t pwm_
 				TCCR1A = (1<<COM1B1) | (1<<WGM10);
 				TCCR1B = (1<<CS11) | (1<<WGM12);
 				
-				DDRB = (1<<PB6);
+				DDRB |= (1<<PB6);
 			}
 			if(pwm_value == 0){
 				TCCR1A &= ~(1<<COM1B1);

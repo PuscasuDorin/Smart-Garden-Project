@@ -5,6 +5,9 @@
 void Drivers_init(void){
 	ADC_init();
 	PWM_init(pump_port, pump_pin);
+	PWM_init(rgb_r_port, rgb_r_pin);
+	PWM_init(rgb_g_port, rgb_g_pin);
+	PWM_init(rgb_b_port, rgb_b_pin);
 	TIM_init();
 }
 
