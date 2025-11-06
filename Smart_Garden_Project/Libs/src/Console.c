@@ -8,12 +8,14 @@
 #include "LCD_TEST.h"
 #include "PWM.h"
 #include <avr/interrupt.h>
+#include <stdio.h>
 
 enum MODES{
 	MODE_NONE = 1,
 	MODE_UI,
 	MODE_SENSORS,
-	MODE_ACTUATORS
+	MODE_ACTUATORS,
+	MODE_COMPONENT_PINS
 } ;
 
 static void set_mode(enum MODES mode);
@@ -35,6 +37,7 @@ void console_init(void){
 
 void start_debugging(void){
 	return;
+	UART_TransmitString("See Sensors Pins and Ports");
 }
 
 void set_mode(enum MODES mode) {
@@ -52,6 +55,9 @@ void set_mode(enum MODES mode) {
 			break;
 		case 4:
 			UART_TransmitString("=== Actuators test mode active ===\n\r");
+			break;
+		case 5:
+			UART_TransmitString("=== Display Component Pins ===\n\r");
 			break;
 	}
 }
@@ -100,10 +106,50 @@ void UI_mode(void){
 }
 
 void Sensors_mode(void){
-	return;
+	uint8_t value = 0;
+	UART_TransmitString("How many sensor readings do you want to take?\n\r");
+	UART_TransmitString(">> ");
+	while(!str_is_complete);
+	
+	if(str_is_complete){
+		str_is_complete = false;
+		
+		value = atoi((const char *)rx_buffer);
+		
+		char buffer[16];
+		for(int i = 1; i <= value; i++){
+			UART_TransmitString("=== Reading ");
+			sprintf(buffer, "%d", i);
+			UART_TransmitString(buffer);
+			UART_TransmitString(" === \n\r");
+			
+			UART_TransmitString(">> Temperature: ");
+			sprintf(buffer, "%.2f", read_LM35_Temp());
+			UART_TransmitString(buffer);
+			
+			UART_TransmitString(">> Luminosity: ");
+			sprintf(buffer, "%.2f", read_LightSensor_Percentages());
+			UART_TransmitString(buffer);
+			UART_TransmitString("% \n\r");
+			
+			UART_TransmitString(">> Soil Moisture: ");
+			UART_TransmitString("\n\r");
+			//
+			
+			UART_TransmitString(">> Water Level: ");
+			UART_TransmitString("\n\r");
+			//
+			_delay_ms(1000);
+		}
+	}
+	
 }
 
 void Actuators_mode(void){
+	return;
+}
+
+void Component_Pins_mode(void){
 	return;
 }
 
