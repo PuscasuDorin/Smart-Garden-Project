@@ -1,9 +1,3 @@
-/*
- * Smart_Garden_Project.c
- *
- * Created: 10/17/2025 3:11:53 PM
- * Author : Dorin
- */ 
 #define F_CPU 16000000UL
 
 #include <avr/io.h>
@@ -11,6 +5,7 @@
 #include <stdio.h>
 #include "system.h"
 #include <avr/interrupt.h>
+#include "LCD_UI.h"
 
 int main(void)
 {
@@ -22,6 +17,7 @@ int main(void)
 	
 	Peripherals_init();
 	Drivers_init();
+	char buffer[16];
 	
     while (1) 
     {
@@ -29,6 +25,10 @@ int main(void)
 		
 		if(global_time % 503 == 0){
 			//0.5s for LCD refresh
+			UI_set_temperature(temperature_celsius);
+			UI_set_light_procent(light_procent);
+			UI_set_soil_moisture(soil_moisture);
+			UI_set_water_level(water_level);
 		}
 		
 		if(global_time % 29993 == 0){
@@ -51,7 +51,13 @@ int main(void)
 		}
 		
 		
-		
+		/*
+		LCD_gotoxy(0,0);
+		//LCD_sendData(223); //Degree
+		LCD_sendData(0x5E); //UP arrow
+		LCD_sendData(0x76); //DOWN arrow
+		LCD_print("C and c");
+		*/
 		/*	
 		char strr[10];
 		sprintf(strr, "%lu", global_time);

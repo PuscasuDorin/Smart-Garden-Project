@@ -10,7 +10,7 @@
 #include <avr/interrupt.h>
 #include <stdio.h>
 
-enum MODES{
+static enum CONSOLE_MODES{
 	MODE_NONE = 1,
 	MODE_UI,
 	MODE_SENSORS,
@@ -18,7 +18,7 @@ enum MODES{
 	MODE_COMPONENT_PINS
 } ;
 
-static void set_mode(enum MODES mode);
+static void set_mode(enum CONSOLE_MODES mode);
 static void UI_mode(void);
 static void Sensors_mode(void);
 static void Actuators_mode(void);
@@ -26,7 +26,7 @@ static void lcd_test_mode(void);
 static void rgb_led_test_mode(void);
 
 volatile bool debugging = false;
-enum MODES current_mode = MODE_NONE;
+static enum CONSOLE_MODES current_mode = MODE_NONE;
 
 void console_init(void){
 	UART_Init(UART_baud_rate);
@@ -40,7 +40,7 @@ void start_debugging(void){
 	UART_TransmitString("See Sensors Pins and Ports");
 }
 
-void set_mode(enum MODES mode) {
+void set_mode(enum CONSOLE_MODES mode) {
 	current_mode = mode;
 	
 	switch(mode) {

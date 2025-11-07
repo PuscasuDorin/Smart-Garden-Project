@@ -177,6 +177,9 @@
     <Compile Include="Libs\inc\LCD_TEST.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Libs\inc\LCD_UI.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Libs\inc\LightSensor.h">
       <SubType>compile</SubType>
     </Compile>
@@ -193,6 +196,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Libs\src\LCD_TEST.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Libs\src\LCD_UI.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Libs\src\LightSensor.c">
