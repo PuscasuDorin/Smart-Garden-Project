@@ -25,9 +25,8 @@ void LCD_UI_UpdateData(void){
 	
 }
 
-void LCD_UI_MainScreen(void){
+void LCD_UI_MainScreen(uint8_t page){
 	char buffer[16];
-	uint8_t page = 0;
 	switch(page){
 		case 0:
 			LCD_gotoxy(12,0);
