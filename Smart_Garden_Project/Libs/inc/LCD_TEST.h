@@ -9,7 +9,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define LCD_ADDR 0x27 // or 0x3F
+#define LCD_ADDR 0x27
 
 void I2C_Init(void);
 void I2C_start(uint8_t address);
@@ -22,5 +22,8 @@ void LCD_sendData(uint8_t data);
 void LCD_clear(void);
 void LCD_gotoxy(uint8_t x, uint8_t y);
 void LCD_print(char *str);
+
+void LCD_backlightOn(void);
+void LCD_backlightOff(void);
 
 #endif /* LCD_TEST_H_ */

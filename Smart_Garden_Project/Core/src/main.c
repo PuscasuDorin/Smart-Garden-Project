@@ -14,6 +14,12 @@
 
 int main(void)
 {
+	float temperature_celsius = 0.0f;
+	float light_procent = 0.0f;
+	float soil_moisture = 0.0f;
+	float water_level = 0.0f;
+	uint8_t water_level_cycles = 0;
+	
 	Peripherals_init();
 	Drivers_init();
 	
@@ -27,10 +33,13 @@ int main(void)
 		
 		if(global_time % 29993 == 0){
 			//30s for Temperature Sensor
+			temperature_celsius = read_LM35_Temp();
 		}
 		
 		if(global_time % 59993  == 0){
 			//1min for Light Sensor
+			light_procent = read_LightSensor_Percentages();
+			
 		}
 		
 		if(global_time % 3599993UL  == 0){
@@ -40,6 +49,8 @@ int main(void)
 		if(global_time % 7199993UL  == 0){
 			//2h for Water Level Sensor
 		}
+		
+		
 		
 		/*	
 		char strr[10];
