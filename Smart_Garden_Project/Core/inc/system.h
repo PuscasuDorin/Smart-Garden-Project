@@ -15,8 +15,10 @@
 	#include "LM35.h"
 	#include "LCD_TEST.h"
 	
-	void Drivers_init(void);
+	void drivers_init(void);
 	
-	void Peripherals_init(void);
+	void peripherals_init(void);
+	
+	void drivers_and_peripherals_init(void);
 
 #endif /* SYSTEM_H_ */

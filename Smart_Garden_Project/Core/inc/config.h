@@ -1,6 +1,9 @@
 
 #ifndef CONFIG_H_
 #define CONFIG_H_
+	
+	#define full_block_char 0xFF
+	#define degrees_char 0xDF
 
 	#define pump_port &PORTE
 	#define pump_pin PE4

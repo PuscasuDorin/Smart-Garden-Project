@@ -10,13 +10,13 @@
 #include <avr/interrupt.h>
 #include <stdio.h>
 
-static enum CONSOLE_MODES{
+enum CONSOLE_MODES{
 	MODE_NONE = 1,
 	MODE_UI,
 	MODE_SENSORS,
 	MODE_ACTUATORS,
 	MODE_COMPONENT_PINS
-} ;
+};
 
 static void set_mode(enum CONSOLE_MODES mode);
 static void UI_mode(void);

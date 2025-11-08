@@ -3,6 +3,7 @@
 #include "LCD_TEST.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include "config.h"
 	
 enum LCD_MODES{
 	MODE_NONE = 0,

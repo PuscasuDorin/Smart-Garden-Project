@@ -15,8 +15,7 @@ int main(void)
 	float water_level = 0.0f;
 	uint8_t water_level_cycles = 0;
 	char buffer[16];
-	Peripherals_init();
-	Drivers_init();
+	drivers_and_peripherals_init();
 	
     while (1) 
     {
