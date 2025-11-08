@@ -13,7 +13,9 @@ void drivers_init(void){
 	init = true;
 	visual_init();
 	init = false;
-
+	buttons_init();
+	visual_init();
+	
 	ADC_init();
 	visual_init();
 	
@@ -86,7 +88,6 @@ void visual_init(void){
 		}
 		LCD_sendData(0xFF);
 		
-		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);

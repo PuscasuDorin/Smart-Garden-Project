@@ -11,15 +11,14 @@
 
 int main(void)
 {
-	float temperature_celsius = 0.0f;
-	float light_procent = 0.0f;
+	float temperature_celsius;
+	float light_procent;
 	float soil_moisture = 0.0f;
 	float water_level = 0.0f;
 	uint8_t water_level_cycles = 0;
 	//char buffer[16];
 	
 	drivers_and_peripherals_init();
-	buttons_init();
 	
     while (1) 
     {
