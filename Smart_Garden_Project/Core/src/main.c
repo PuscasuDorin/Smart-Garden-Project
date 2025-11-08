@@ -15,6 +15,7 @@ int main(void)
 	float water_level = 0.0f;
 	uint8_t water_level_cycles = 0;
 	char buffer[16];
+	
 	drivers_and_peripherals_init();
 	
     while (1) 
@@ -27,8 +28,6 @@ int main(void)
 			UI_set_light_procent(light_procent);
 			UI_set_soil_moisture(soil_moisture);
 			UI_set_water_level(water_level);
-			LCD_gotoxy(0,0);
-			LCD_sendData(0xFF); //Full block
 		}
 		
 		if(global_time % 29993 == 0){

@@ -2,6 +2,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 	
+	#define F_CPU 16000000UL
 	#define full_block_char 0xFF
 	#define degrees_char 0xDF
 

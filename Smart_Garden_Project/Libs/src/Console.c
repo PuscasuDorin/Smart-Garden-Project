@@ -3,10 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include "console.h"
-#include "UART.h"
 #include "config.h"
 #include "LCD_TEST.h"
-#include "PWM.h"
+#include "system.h"
 #include <avr/interrupt.h>
 #include <stdio.h>
 
