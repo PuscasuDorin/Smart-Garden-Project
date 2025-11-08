@@ -14,7 +14,7 @@ int main(void)
 	float soil_moisture = 0.0f;
 	float water_level = 0.0f;
 	uint8_t water_level_cycles = 0;
-	
+	char buffer[16];
 	Peripherals_init();
 	Drivers_init();
 	
