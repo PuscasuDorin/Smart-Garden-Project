@@ -30,7 +30,7 @@
 	#define up_b_pin PB0
 	#define down_b_port &PORTB
 	#define down_b_pin PB1
-	#define start_b_port &PORTB
-	#define start_b_pin PB2
+	#define select_b_port &PORTB
+	#define select_b_pin PB2
 
 #endif /* CONFIG_H_ */

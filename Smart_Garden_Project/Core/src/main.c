@@ -4,6 +4,7 @@
 #include <util/delay.h>
 #include <stdio.h>
 #include "system.h"
+#include "config.h"
 #include <avr/interrupt.h>
 #include "LCD_UI.h"
 #include "Buttons.h"
@@ -29,6 +30,9 @@ int main(void)
 			UI_set_light_procent(light_procent);
 			UI_set_soil_moisture(soil_moisture);
 			UI_set_water_level(water_level);
+			
+			LCD_UI_UpdateData();
+		}
 		
 		if(global_time % 29993 == 0){
 			//30s for Temperature Sensor

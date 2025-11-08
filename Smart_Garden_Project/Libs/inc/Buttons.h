@@ -5,9 +5,9 @@
 	
 	#include <stdbool.h>
 
-	extern volatile bool button_up_pressed;
-	extern volatile bool button_down_pressed;
-	extern volatile bool button_start_pressed;
+	extern volatile bool up_button_pressed;
+	extern volatile bool down_button_pressed;
+	extern volatile bool select_button_pressed;
 
 	void buttons_init(void);
 
