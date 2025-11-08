@@ -6,6 +6,7 @@
 #include "system.h"
 #include <avr/interrupt.h>
 #include "LCD_UI.h"
+#include "Buttons.h"
 
 int main(void)
 {
@@ -14,21 +15,20 @@ int main(void)
 	float soil_moisture = 0.0f;
 	float water_level = 0.0f;
 	uint8_t water_level_cycles = 0;
-	char buffer[16];
+	//char buffer[16];
 	
 	drivers_and_peripherals_init();
+	buttons_init();
 	
     while (1) 
     {
 		uint32_t global_time = system_time_ms();
-		
 		if(global_time % 503 == 0){
 			//0.5s for LCD refresh
 			UI_set_temperature(temperature_celsius);
 			UI_set_light_procent(light_procent);
 			UI_set_soil_moisture(soil_moisture);
 			UI_set_water_level(water_level);
-		}
 		
 		if(global_time % 29993 == 0){
 			//30s for Temperature Sensor

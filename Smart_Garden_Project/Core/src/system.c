@@ -63,29 +63,31 @@ void visual_init(void){
 		LCD_print("Initialize....");
 		LCD_gotoxy(0,1);
 	}
+	
 	if(drivers_and_data_initialized){
 		for (int i = 0; i < 5; i++){
 			read_LightSensor_Percentages();
 			_delay_ms(10);
 		}
-		LCD_sendData(0xFF);
 		
 		for (int i = 0; i < 5; i++){
 			read_LM35_Temp();
 			_delay_ms(10);
 		}
-		LCD_sendData(0xFF);
 		
 		for (int i = 0; i < 5; i++){
 			//read soil moisture sensor
 			_delay_ms(10);
 		}
-		LCD_sendData(0xFF);
 		
 		for (int i = 0; i < 5; i++){
 			//read water level
 			_delay_ms(10);
 		}
+		LCD_sendData(0xFF);
+		
+		LCD_sendData(0xFF);
+		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);
 	}

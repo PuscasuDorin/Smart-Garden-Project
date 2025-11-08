@@ -171,6 +171,9 @@
     <Compile Include="Drivers\src\UART.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Libs\inc\Buttons.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Libs\inc\console.h">
       <SubType>compile</SubType>
     </Compile>
@@ -190,6 +193,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Libs\inc\WaterLevelSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Libs\src\Buttons.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Libs\src\console.c">

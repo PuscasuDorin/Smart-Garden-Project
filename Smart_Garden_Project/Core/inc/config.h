@@ -3,6 +3,7 @@
 #define CONFIG_H_
 	
 	#define F_CPU 16000000UL
+	
 	#define full_block_char 0xFF
 	#define degrees_char 0xDF
 
@@ -24,5 +25,12 @@
 	#define rgb_g_pin PH4
 	#define rgb_b_port &PORTH
 	#define rgb_b_pin PH5
+	
+	#define up_b_port &PORTB
+	#define up_b_pin PB0
+	#define down_b_port &PORTB
+	#define down_b_pin PB1
+	#define start_b_port &PORTB
+	#define start_b_pin PB2
 
 #endif /* CONFIG_H_ */
