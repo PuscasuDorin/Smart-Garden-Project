@@ -2,6 +2,7 @@
 #include "LCD_UI.h"
 #include "LCD_TEST.h"
 #include <stdio.h>
+#include <stdbool.h>
 	
 enum LCD_MODES{
 	MODE_NONE = 0,
@@ -15,6 +16,7 @@ static float UI_soil_moisture = 0.0f;
 static float UI_water_level = 0.0f;
 static uint8_t UI_water_level_cycles = 0;
 static uint8_t page_number = 0;
+bool start_b_pressed = false;
 	
 static enum LCD_MODES current_mode = MODE_NONE;
 
@@ -75,16 +77,23 @@ void LCD_UI_MainScreen(uint8_t page){
 			break;
 			
 		case 3:
-			LCD_gotoxy(0,0);
-			LCD_print("WATER THE PLANT");
-			LCD_gotoxy(15,0);
-			LCD_print("^");
-			
-			LCD_gotoxy(1,1);
-			LCD_print("-HOLD BUTTON-");
-			
-			LCD_gotoxy(15,1);
-			LCD_print("v");
+			if (!start_b_pressed) {
+				LCD_gotoxy(0,0);
+				LCD_print("WATER THE PLANT");
+				LCD_gotoxy(15,0);
+				LCD_print("^");
+				
+				LCD_gotoxy(1,1);
+				LCD_print("-HOLD START-");
+				
+				LCD_gotoxy(15,1);
+				LCD_print("v");
+			}
+			else if(start_b_pressed) {
+				LCD_clear();
+				LCD_gotoxy(0,0);
+				LCD_print("WATERING...");
+			}
 			break;
 	}
 }
