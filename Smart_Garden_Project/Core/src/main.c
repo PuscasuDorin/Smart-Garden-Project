@@ -20,7 +20,7 @@ int main(void)
 	
     while (1) 
     {
-		uint32_t global_time = TIM_value();
+		uint32_t global_time = system_time_ms();
 		
 		if(global_time % 503 == 0){
 			//0.5s for LCD refresh
