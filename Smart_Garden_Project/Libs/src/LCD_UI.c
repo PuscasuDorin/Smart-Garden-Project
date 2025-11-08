@@ -31,7 +31,7 @@ void LCD_UI_UpdateData(void){
 		if(ui_timer == 0){
 			ui_timer = system_time_ms();
 		}
-		else if(system_time_ms() - ui_timer >= 30011 && system_time_ms() - ui_timer <= 40011){
+		else if(system_time_ms() - ui_timer >= 30011){
 			current_mode = MODE_STANDBY;
 			ui_timer = system_time_ms();	
 		}
@@ -45,7 +45,7 @@ void LCD_UI_UpdateData(void){
 		}
 		if(down_button_pressed){
 			ui_timer = system_time_ms();
-			if(page_number < 2){
+			if(page_number < 3){
 				page_number++;
 			}
 			else{
@@ -63,6 +63,7 @@ void LCD_UI_UpdateData(void){
 			up_button_pressed = false;
 			down_button_pressed = false;
 			LCD_backlightOn();
+			ui_timer = system_time_ms();
 			current_mode = MODE_ACTIVE;
 		}
 	}
@@ -74,6 +75,18 @@ void LCD_UI_MainScreen(uint8_t page){
 	
 	switch(page_number){
 		case 0:
+			LCD_gotoxy(0,0);
+			LCD_print(" SMART  GARDEN ");
+			LCD_gotoxy(15,0);
+			LCD_print("^");
+			
+			LCD_gotoxy(15,1);
+			LCD_print("v");
+			LCD_gotoxy(0,1);
+			LCD_print("---------------");
+			
+			break;
+		case 1:
 			length_of_floats = sprintf(buffer, "%.2f", UI_temperature_celsius);
 			
 			switch(length_of_floats){
@@ -125,7 +138,7 @@ void LCD_UI_MainScreen(uint8_t page){
 			LCD_print("v");
 			break;
 			
-		case 1:
+		case 2:
 			length_of_floats = sprintf(buffer, "%.2f", UI_soil_moisture);
 		
 			switch(length_of_floats){
@@ -174,7 +187,7 @@ void LCD_UI_MainScreen(uint8_t page){
 			LCD_print("v");
 			break;
 			
-		case 2:
+		case 3:
 			if (!select_button_pressed) {
 				LCD_gotoxy(0,0);
 				LCD_print("WATER THE PLANT");

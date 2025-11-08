@@ -31,6 +31,11 @@ void console_init(void){
 	UART_Init(UART_baud_rate);
 	UART_TransmitString("=== Smart Garden Console ===\n\r");
 	UART_TransmitString("Type 'help' to view commands.\n\r");
+	//if user typed help then 
+	//LCD_gotoxy(0,0);
+	//LCD_print("-DEBUGGING MODE-");
+	//LCD_gotoxy(0,1);
+	//LCD_print("----------------");
 	//UI_mode();
 }
 
@@ -95,6 +100,7 @@ void UI_mode(void){
 		switch(ui_selection) {
 			case 1:
 				UART_TransmitString("=== LCD_TEST selected ===  \n\r");
+				LCD_clear();
 				lcd_test_mode();
 				break;
 			case 2:
