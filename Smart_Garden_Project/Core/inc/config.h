@@ -12,12 +12,18 @@
 	
 	#define UART_baud_rate 9600
 	
-	#define light_sensor_adc_channel 1
+	#define light_sensor_adc_channel 15
 	#define light_sensor_R_ref 9800
 	#define light_sensor_V_ref 5.0f
 	
-	#define temp_sensor_adc_channel 0
+	#define temp_sensor_adc_channel 8
 	#define temp_sensor_V_ref 5.0f
+	
+	#define soil_sensor_adc_channel 1
+	#define soil_sensor_V_ref 5.0f
+	
+	#define water_sensor_adc_channel 3
+	#define water_sensor_V_ref 5.0f
 	
 	#define rgb_r_port &PORTH
 	#define rgb_r_pin PH3

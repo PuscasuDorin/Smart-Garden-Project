@@ -13,8 +13,8 @@ enum LCD_MODES{
 	MODE_ACTIVE
 	};
 
-static float UI_temperature_celsius;
-static float UI_light_procent;
+static float UI_temperature_celsius = 0.0f;
+static float UI_light_procent = 0.0f;
 static float UI_soil_moisture = 0.0f;
 static float UI_water_level = 0.0f;
 static uint8_t UI_water_level_cycles = 0;

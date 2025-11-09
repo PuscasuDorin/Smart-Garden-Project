@@ -11,8 +11,8 @@
 
 int main(void)
 {
-	float temperature_celsius;
-	float light_procent;
+	float temperature_celsius = 0.0f;
+	float light_procent = 0.0f;
 	float soil_moisture = 0.0f;
 	float water_level = 0.0f;
 	uint8_t water_level_cycles = 0;
@@ -33,23 +33,25 @@ int main(void)
 			LCD_UI_UpdateData();
 		}
 		
-		if(global_time % 29993 == 0){
-			//30s for Temperature Sensor
+		if(global_time % 10007 == 0){
+			//30s for Temperature Sensor 29993
 			temperature_celsius = read_LM35_Temp();
 		}
 		
-		if(global_time % 59993  == 0){
-			//1min for Light Sensor
+		if(global_time % 11971  == 0){
+			//1min for Light Sensor 59993
 			light_procent = read_LightSensor_Percentages();
 			
 		}
 		
-		if(global_time % 3599993UL  == 0){
-			//1h for Soil Moisture Sensor
+		if(global_time % 13999  == 0){
+			//1h for Soil Moisture Sensor 3599993UL
+			soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
 		}
 		
-		if(global_time % 7199993UL  == 0){
-			//2h for Water Level Sensor
+		if(global_time % 15997  == 0){
+			//2h for Water Level Sensor 7199993UL
+			water_level = ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
 		}
     }
 }

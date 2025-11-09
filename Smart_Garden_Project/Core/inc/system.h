@@ -9,6 +9,7 @@
 	#include "PWM.h"
 	#include "TIM.h"
 	#include "UART.h"
+	#include "Buttons.h"
 
 	//Peripherals
 	#include "LightSensor.h"
