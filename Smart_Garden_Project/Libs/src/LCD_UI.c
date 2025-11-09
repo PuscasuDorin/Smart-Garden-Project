@@ -6,6 +6,7 @@
 #include "config.h"
 #include "Buttons.h"
 #include "TIM.h"
+#include "PWM.h"
 	
 enum LCD_MODES{
 	MODE_NONE = 0,
@@ -19,12 +20,13 @@ static float UI_soil_moisture = 0.0f;
 static float UI_water_level = 0.0f;
 static uint8_t UI_water_level_cycles = 0;
 static uint8_t page_number = 0;
-uint8_t length_of_floats = 0;
+static uint8_t length_of_floats = 0;
 static uint32_t ui_timer;
+static bool pump_enable = false;
 	
 static enum LCD_MODES current_mode = MODE_ACTIVE;
 
-void LCD_UI_MainScreen(uint8_t page);
+static void LCD_UI_MainScreen(uint8_t page);
 
 void LCD_UI_UpdateData(void){
 	if(current_mode == MODE_ACTIVE ){
@@ -199,12 +201,16 @@ void LCD_UI_MainScreen(uint8_t page){
 				
 				LCD_gotoxy(15,1);
 				LCD_print("v");
+				
+				pump_enable = false;
 			}
 			else if(select_button_pressed) {
 				LCD_clear();
 				LCD_gotoxy(0,0);
 				LCD_print("WATERING...");
+				pump_enable = true;
 			}
+			start_pump(pump_enable);
 			break;
 	}
 }
@@ -227,4 +233,13 @@ void UI_set_soil_moisture(float soil_val){
 
 void UI_set_water_level(float water_val){
 	UI_water_level = water_val;
+}
+
+void start_pump(bool state){
+	if (!state){
+		set_PumpSpeed(pump_port, pump_pin, 0);
+	}
+	else{
+		set_PumpSpeed(pump_port, pump_pin, 200);
+	}
 }

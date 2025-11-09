@@ -8,4 +8,6 @@
 	void UI_set_water_level(float water_val);
 	
 	void LCD_UI_UpdateData(void);
+	
+	void start_pump(bool state);
 #endif /* LCD_UI_H_ */
