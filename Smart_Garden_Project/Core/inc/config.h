@@ -32,6 +32,7 @@
 	#define rgb_b_port &PORTH
 	#define rgb_b_pin PH5
 	
+	#define BUTTONS_DEBOUNCE_MS 400
 	#define up_b_port &PORTB
 	#define up_b_pin PB0
 	#define down_b_port &PORTB
