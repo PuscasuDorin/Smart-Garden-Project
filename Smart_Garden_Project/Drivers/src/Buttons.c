@@ -3,10 +3,13 @@
 #include "config.h"
 #include <avr/interrupt.h>
 #include <stdbool.h>
+#include "TIM.h"
 
 volatile bool up_button_pressed = 0;
 volatile bool down_button_pressed = 0;
 volatile bool select_button_pressed = 0;
+static uint32_t up_button_last_press = 0;
+static uint32_t down_button_last_press = 0;
 
 void buttons_init(void){
 	DDRB &= ~((1 << up_b_pin) | (1 << down_b_pin) | (1 << select_b_pin));
@@ -19,11 +22,16 @@ void buttons_init(void){
 
 ISR(PCINT0_vect){
 	if (!(PINB & (1 << up_b_pin))){
-		up_button_pressed = 1;
+		if(system_time_ms() - up_button_last_press > 20){
+			up_button_pressed = 1;
+		}
+		up_button_last_press = system_time_ms();	
 	}
-	if (
-	!(PINB & (1 << down_b_pin))){
-		down_button_pressed = 1;
+	if (!(PINB & (1 << down_b_pin))){
+		if(system_time_ms() - down_button_last_press > 20){
+			down_button_pressed = 1;
+		}
+		down_button_last_press = system_time_ms();
 	}
 
 	select_button_pressed = !(PINB & (1 << select_b_pin));
