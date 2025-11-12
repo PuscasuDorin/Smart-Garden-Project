@@ -20,7 +20,9 @@ int main(void)
 	uint16_t watering_time = 4000;
 	uint16_t now_watering_time = 0;
 	uint16_t dry_soil_threshold;
-	uint16_t high_temp_threshold;
+	uint16_t high_temp_threshold = 26;
+	uint16_t strong_light_threshold;
+	uint16_t darkness_threshold;
 	//char buffer[16];
 	
 	drivers_and_peripherals_init();
@@ -57,15 +59,18 @@ int main(void)
 		
 		if(global_time % 13999  == 0){
 			//1h for Soil Moisture Sensor 3599993UL
-			soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);]
+			soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
 			if (soil_moisture <= dry_soil_threshold){
 				if(temperature_celsius >= high_temp_threshold){
-					if(light_procent >= 70){
-						now_watering_time = system_time_ms()
+					if(light_procent <= darkness_threshold){
+						now_watering_time = system_time_ms();
 						watering = true;
 					}
 				}
-				
+				else{
+					now_watering_time = system_time_ms();
+					watering = true;
+				}
 			}
 		}
 		
