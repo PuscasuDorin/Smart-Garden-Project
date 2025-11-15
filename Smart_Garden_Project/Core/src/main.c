@@ -23,6 +23,9 @@ int main(void)
 	uint16_t high_temp_threshold = 26;
 	uint16_t strong_light_threshold;
 	uint16_t darkness_threshold;
+	uint8_t overflow_read = 0;
+	bool overflow = false;
+	float overflow_threshold = 0.5f;
 	//char buffer[16];
 	
 	drivers_and_peripherals_init();
@@ -31,11 +34,21 @@ int main(void)
     {
 		uint32_t global_time = system_time_ms();
 		if(global_time % 503 == 0){
-			//0.5s for LCD refresh
+			//0.5s
+			overflow_read = ADC_read_voltage(overflow_sensor_adc_channel, overflow_sensor_V_ref);
+			if(overflow_read >= overflow_threshold){
+				overflow = true;
+				watering = false;
+			}
+			else if(overflow_read < overflow_threshold && overflow){
+				overflow = false;
+			}
+			
 			UI_set_temperature(temperature_celsius);
 			UI_set_light_procent(light_procent);
 			UI_set_soil_moisture(soil_moisture);
 			UI_set_water_level(water_level);
+			set_overflow_value(overflow);
 			
 			LCD_UI_UpdateData();
 			
@@ -60,7 +73,7 @@ int main(void)
 		if(global_time % 13999  == 0){
 			//1h for Soil Moisture Sensor 3599993UL
 			soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
-			if (soil_moisture <= dry_soil_threshold){
+			if (soil_moisture <= dry_soil_threshold && !overflow){
 				if(temperature_celsius >= high_temp_threshold){
 					if(light_procent <= darkness_threshold){
 						now_watering_time = system_time_ms();

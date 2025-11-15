@@ -23,6 +23,7 @@ static uint8_t page_number = 0;
 static uint8_t length_of_floats = 0;
 static uint32_t ui_timer;
 static bool pump_enable = false;
+static bool overflow = false;
 	
 static enum LCD_MODES current_mode = MODE_ACTIVE;
 
@@ -68,6 +69,19 @@ void LCD_UI_UpdateData(void){
 			ui_timer = system_time_ms();
 			current_mode = MODE_ACTIVE;
 		}
+	}
+	
+	if(overflow){
+		current_mode = MODE_NONE;
+		
+		LCD_clear();
+		LCD_gotoxy(0,0);
+		LCD_print("-The flower pot-");
+		LCD_gotoxy(1,0);
+		LCD_print("-is overflowing-");
+	}
+	else(!overflow){
+		current_mode = MODE_ACTIVE;
 	}
 }
 
@@ -204,7 +218,7 @@ void LCD_UI_MainScreen(uint8_t page){
 				
 				pump_enable = false;
 			}
-			else if(select_button_pressed) {
+			else if(select_button_pressed && !overflow) {
 				LCD_clear();
 				LCD_gotoxy(0,0);
 				LCD_print("WATERING...");
@@ -233,6 +247,10 @@ void UI_set_soil_moisture(float soil_val){
 
 void UI_set_water_level(float water_val){
 	UI_water_level = water_val;
+}
+
+void set_overflow_value(bool overflow_val){
+	overflow_val = overflow;
 }
 
 void start_pump(bool state){
