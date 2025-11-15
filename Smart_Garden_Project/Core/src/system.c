@@ -1,8 +1,9 @@
 #include <avr/io.h>
-#include "system.h"
-#include "config.h"
 #include <stdbool.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
+#include "system.h"
+#include "config.h"
 
 static bool init = false;
 static bool drivers_and_data_initialized = false;
@@ -49,6 +50,8 @@ void peripherals_init(void){
 	visual_init();
 	
 	LCD_clear();
+	
+	sei();
 }
 
 void drivers_and_peripherals_init(void){
