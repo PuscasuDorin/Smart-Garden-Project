@@ -30,7 +30,7 @@ static enum LCD_MODES current_mode = MODE_ACTIVE;
 static void LCD_UI_MainScreen(uint8_t page);
 
 void LCD_UI_UpdateData(void){
-	if(current_mode == MODE_ACTIVE ){
+	if(current_mode == MODE_ACTIVE){
 		if(ui_timer == 0){
 			ui_timer = system_time_ms();
 		}
@@ -80,7 +80,7 @@ void LCD_UI_UpdateData(void){
 		LCD_gotoxy(1,0);
 		LCD_print("-is overflowing-");
 	}
-	else(!overflow){
+	else if(!overflow){
 		current_mode = MODE_ACTIVE;
 	}
 }
