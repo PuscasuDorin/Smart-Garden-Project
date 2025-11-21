@@ -87,13 +87,12 @@ void LCD_UI_UpdateData(void){
 		current_mode = MODE_ACTIVE;
 	}
 	*/
-	if(UI_water_level_cycles == 0 && UI_water_level <= 0.2){
-		//wake_lcd_on_button_press();
+	if(UI_water_level_cycles == 0 && UI_water_level < 0.5){
 		current_mode = MODE_NONE;
 		no_water = true;
 		LCD_UI_MainScreen(4);
 	}
-	else if(UI_water_level >= 1 && current_mode != MODE_ACTIVE && current_mode != MODE_STANDBY){	
+	else if(UI_water_level >= 0.5 && current_mode != MODE_ACTIVE && current_mode != MODE_STANDBY){	
 		no_water = false;
 		current_mode = MODE_ACTIVE;
 		page_number = 0;

@@ -11,6 +11,8 @@
 
 int main(void)
 {
+	drivers_and_peripherals_init();
+	
 	float temperature_celsius = read_LM35_Temp();
 	float light_procent = read_LightSensor_Percentages();
 	float soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
@@ -19,16 +21,14 @@ int main(void)
 	bool watering = false;
 	uint16_t watering_time = 4000;
 	uint16_t now_watering_time = 0;
-	uint16_t dry_soil_threshold;
+	uint16_t dry_soil_threshold = 2.9f;
 	uint16_t high_temp_threshold = 26;
-	uint16_t strong_light_threshold;
-	uint16_t darkness_threshold;
+	uint16_t strong_light_threshold = 80;
+	uint16_t darkness_threshold = 10;
 	uint8_t overflow_read = 0;
 	bool overflow = false;
 	float overflow_threshold = 0.5f;
 	//char buffer[16];
-	
-	drivers_and_peripherals_init();
 	
     while (1) 
     {
