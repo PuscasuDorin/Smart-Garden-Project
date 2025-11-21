@@ -8,7 +8,8 @@
 	void UI_set_light_procent(float light_val);
 	void UI_set_soil_moisture(float soil_val);
 	void UI_set_water_level(float water_val);
-	void set_overflow_value(bool overflow_val);
+	void UI_set_water_level_cycles(uint8_t water_cycles);
+	//void set_overflow_value(bool overflow_val);
 	
 	void LCD_UI_UpdateData(void);
 	
