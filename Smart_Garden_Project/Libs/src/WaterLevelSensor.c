@@ -10,6 +10,8 @@ static uint8_t water_sensor_channel = 0;
 static float V_ref = 5.0f;
 
 void water_sensor_init(uint8_t channel, float V_ref_param){
+	DDRB |= (1 << water_sensor_pin);
+	
 	water_sensor_channel = channel;
 	V_ref = V_ref_param;
 	

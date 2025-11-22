@@ -91,18 +91,12 @@ int main(void)
 		
 		if(global_time % 20011 == 0){
 			//1h 45m for Water Level Sensor 6300007UL
-			water_sensor_port |= (1 << water_sensor_pin);
-			_delay_ms(10);
-			water_level = ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
-			water_sensor_port &= ~(1 << water_sensor_pin);
+			water_level = read_water_sensor();
 		}
 		
 		if(global_time % 25013 == 0){
 			//2h for Soil Moisture Sensor 7199993UL
-			soil_sensor_port |= (1 << soil_sensor_pin);
-			_delay_ms(10);
-			soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);		
-			soil_sensor_port &= ~(1 << soil_sensor_pin);
+			soil_moisture = read_soil_sensor();
 			
 			if (soil_moisture >= dry_soil_threshold && !overflow && !no_water){
 				if(temperature_celsius >= high_temp_threshold){

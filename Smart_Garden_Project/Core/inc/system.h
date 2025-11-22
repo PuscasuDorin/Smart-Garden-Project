@@ -15,6 +15,8 @@
 	#include "LightSensor.h"
 	#include "LM35.h"
 	#include "LCD_TEST.h"
+	#include "SoilMoistureSensor.h"
+	#include "WaterLevelSensor.h"
 	
 	extern float first_read_temperature_celsius;
 	extern float first_read_light_procent;

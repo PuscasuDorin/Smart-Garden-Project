@@ -90,6 +90,7 @@ void LCD_UI_UpdateData(void){
 	*/
 	
 	if(UI_water_level_cycles == 0 && UI_water_level < 0.2){
+		UI_water_level = read_water_sensor();
 		current_mode = MODE_NONE;
 		no_water = true;
 		set_LED_Brightness(red_led_port, red_led_pin, 180);

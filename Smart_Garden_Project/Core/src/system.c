@@ -45,8 +45,13 @@ void peripherals_init(void){
 	console_init();
 	visual_init();
 	
-	DDRB |= (1 << water_sensor_pin) | (1 << soil_sensor_pin);
 	DDRH |= (1 << red_led_pin);
+	visual_init();
+	
+	soil_sensor_init(soil_sensor_adc_channel, soil_sensor_V_ref);
+	visual_init();
+	
+	water_sensor_init(water_sensor_adc_channel, water_sensor_V_ref);
 	visual_init();
 	
 	drivers_and_data_initialized = true;
@@ -81,15 +86,10 @@ void visual_init(void){
 		first_read_light_procent = read_LightSensor_Percentages();	
 		LCD_sendData(0xFF);
 			
-		water_sensor_port |= (1 << water_sensor_pin);
-		soil_sensor_port |= (1 << soil_sensor_pin);
-		_delay_ms(10);
-		first_read_soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
-		first_read_water_level = ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
-		water_sensor_port &= ~(1 << water_sensor_pin);
-		soil_sensor_port &= ~(1 << soil_sensor_pin);
+		first_read_soil_moisture = read_soil_sensor();
 		LCD_sendData(0xFF);
 		
+		first_read_water_level = read_water_sensor();
 		LCD_sendData(0xFF);
 	}
 	
