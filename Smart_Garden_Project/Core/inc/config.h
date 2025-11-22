@@ -19,9 +19,13 @@
 	#define temp_sensor_adc_channel 8
 	#define temp_sensor_V_ref 5.0f
 	
+	#define soil_sensor_port &PORTB
+	#define soil_sensor_pin PB4
 	#define soil_sensor_adc_channel 1
 	#define soil_sensor_V_ref 5.0f
 	
+	#define water_sensor_port &PORTB
+	#define water_sensor_pin PB5
 	#define water_sensor_adc_channel 3
 	#define water_sensor_V_ref 5.0f
 	
@@ -34,6 +38,9 @@
 	//#define rgb_g_pin PH4
 	//#define rgb_b_port &PORTH
 	//#define rgb_b_pin PH5
+	
+	#define red_led_port &PORTH
+	#define red_led_pin PH3
 	
 	#define BUTTONS_DEBOUNCE_MS 400
 	#define up_b_port &PORTB
