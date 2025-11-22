@@ -8,6 +8,11 @@
 static bool init = false;
 static bool drivers_and_data_initialized = false;
 
+float first_read_temperature_celsius;
+float first_read_light_procent;
+float first_read_soil_moisture;
+float first_read_water_level;
+
 static void visual_init(void);
 
 void drivers_init(void){
@@ -68,30 +73,23 @@ void visual_init(void){
 	}
 	
 	if(drivers_and_data_initialized){
-		for (int i = 0; i < 5; i++){
-			read_LightSensor_Percentages();
-			_delay_ms(10);
-		}
-		
-		for (int i = 0; i < 5; i++){
-			read_LM35_Temp();
-			_delay_ms(10);
-		}
-		
-		for (int i = 0; i < 5; i++){
-			ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
-			_delay_ms(10);
-		}
-		
-		for (int i = 0; i < 5; i++){
-			ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
-			_delay_ms(10);
-		}
+		_delay_ms(10);
+		first_read_temperature_celsius = read_LM35_Temp();
+		LCD_sendData(0xFF);
+
+		_delay_ms(10);
+		first_read_light_procent = read_LightSensor_Percentages();	
+		LCD_sendData(0xFF);
+			
+		water_sensor_port |= (1 << water_sensor_pin);
+		soil_sensor_port |= (1 << soil_sensor_pin);
+		_delay_ms(10);
+		first_read_soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
+		first_read_water_level = ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
+		water_sensor_port &= ~(1 << water_sensor_pin);
+		soil_sensor_port &= ~(1 << soil_sensor_pin);
 		LCD_sendData(0xFF);
 		
-		LCD_sendData(0xFF);
-		LCD_sendData(0xFF);
-		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);
 	}
 	

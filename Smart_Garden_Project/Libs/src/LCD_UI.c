@@ -24,7 +24,7 @@ static uint8_t length_of_floats = 0;
 static uint32_t ui_timer;
 static bool pump_enable = false;
 static bool overflow = false;
-static bool no_water = false;
+bool no_water = false;
 	
 static enum LCD_MODES current_mode = MODE_ACTIVE;
 
@@ -68,6 +68,7 @@ void LCD_UI_UpdateData(void){
 			
 		case MODE_STANDBY:
 			//if(current_mode == MODE_STANDBY)
+			page_number = 0;
 			LCD_backlightOff();
 			wake_lcd_on_button_press();
 			break;
@@ -86,18 +87,21 @@ void LCD_UI_UpdateData(void){
 	else if(!overflow){
 		current_mode = MODE_ACTIVE;
 	}
-	if(UI_water_level_cycles == 0 && UI_water_level < 0.5){
-		current_mode = MODE_NONE;
-		no_water = true;
-		LCD_UI_MainScreen(4);
-	}
-	else if(UI_water_level >= 0.5 && current_mode != MODE_ACTIVE && current_mode != MODE_STANDBY){	
-		no_water = false;
-		current_mode = MODE_ACTIVE;
-		page_number = 0;
-	}
 	*/
 	
+	if(UI_water_level_cycles == 0 && UI_water_level < 0.2){
+		current_mode = MODE_NONE;
+		no_water = true;
+		set_LED_Brightness(red_led_port, red_led_pin, 180);
+		wake_lcd_on_button_press();
+		LCD_UI_MainScreen(4);
+	}
+	else if(UI_water_level >= 0.2 && current_mode != MODE_ACTIVE && current_mode != MODE_STANDBY){	
+		no_water = false;
+		set_LED_Brightness(red_led_port, red_led_pin, 0);
+		current_mode = MODE_ACTIVE;
+		page_number = 0;
+	}	
 }
 
 void LCD_UI_MainScreen(uint8_t page){
@@ -174,23 +178,22 @@ void LCD_UI_MainScreen(uint8_t page){
 		
 			switch(length_of_floats){
 				case 4:
+				LCD_gotoxy(9,0);
+				LCD_print("      ");
+				break;
+				case 5:
 				LCD_gotoxy(10,0);
 				LCD_print("     ");
 				break;
-				case 5:
+				case 6:
 				LCD_gotoxy(11,0);
 				LCD_print("    ");
-				break;
-				case 6:
-				LCD_gotoxy(12,0);
-				LCD_print("   ");
 				break;
 			}
 			
 			LCD_gotoxy(0,0);
 			LCD_print("Soil:");
 			LCD_print(buffer);
-			LCD_print("%");
 			LCD_gotoxy(15,0);
 			LCD_print("^");
 			
@@ -287,7 +290,7 @@ void start_pump(bool state){
 		set_PumpSpeed(pump_port, pump_pin, 0);
 	}
 	else{
-		set_PumpSpeed(pump_port, pump_pin, 200);
+		set_PumpSpeed(pump_port, pump_pin, 255);
 	}
 }
 

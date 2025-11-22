@@ -4,6 +4,8 @@
 	
 	#include <stdbool.h>
 	
+	extern bool no_water;
+	
 	void UI_set_temperature(float temp_val);
 	void UI_set_light_procent(float light_val);
 	void UI_set_soil_moisture(float soil_val);
