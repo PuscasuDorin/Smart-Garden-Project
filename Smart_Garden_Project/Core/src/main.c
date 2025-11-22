@@ -19,16 +19,19 @@ int main(void)
 	float water_level = ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
 	uint8_t water_level_cycles = 0;
 	bool watering = false;
-	uint16_t watering_time = 4000;
+	uint16_t watering_time = 4001;
 	uint16_t now_watering_time = 0;
 	uint16_t dry_soil_threshold = 2.9f;
 	uint16_t high_temp_threshold = 26;
-	uint16_t strong_light_threshold = 80;
+	uint16_t strong_light_threshold = 90;
 	uint16_t darkness_threshold = 10;
 	uint8_t overflow_read = 0;
 	bool overflow = false;
 	float overflow_threshold = 0.5f;
 	//char buffer[16];
+	
+	DDRB |= (1 << water_sensor_pin) | (1 << soil_sensor_pin);
+	DDRH |= (1 << red_led_pin);
 	
     while (1) 
     {
@@ -69,24 +72,35 @@ int main(void)
 		if(global_time % 10007 == 0){
 			//30s for Temperature Sensor 29993
 			read_LM35_Temp();
+			read_LM35_Temp();
 			temperature_celsius = read_LM35_Temp();
 		}
 		
 		if(global_time % 11971  == 0){
 			//1min for Light Sensor 59993
 			read_LightSensor_Percentages();
+			read_LightSensor_Percentages();
 			light_procent = read_LightSensor_Percentages();
-			
 		}
 		
-		if(global_time % 13999  == 0){
-			//1h for Soil Moisture Sensor 3599993UL
-			ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
-			soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
+		if(global_time % 20011 == 0){
+			//1h 45m for Water Level Sensor 6300007UL
+			water_sensor_port |= (1 << water_sensor_pin);
+			_delay_ms(10);
+			water_level = ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
+			water_sensor_port &= ~(1 << water_sensor_pin);
+		}
+		
+		if(global_time % 25013 == 0){
+			//2h for Soil Moisture Sensor 7199993UL
+			soil_sensor_port |= (1 << soil_sensor_pin);
+			_delay_ms(10);
+			soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);		
+			soil_sensor_port &= ~(1 << soil_sensor_pin);
 			
-			if (soil_moisture <= dry_soil_threshold && !overflowb){
+			if (soil_moisture <= dry_soil_threshold && !overflow){
 				if(temperature_celsius >= high_temp_threshold){
-					if(light_procent <= darkness_threshold){
+					if(light_procent <= strong_light_threshold){
 						now_watering_time = system_time_ms();
 						watering = true;
 					}
@@ -97,12 +111,6 @@ int main(void)
 				}
 				start_pump(watering);
 			}
-		}
-		
-		if(global_time % 15997  == 0){
-			//2h for Water Level Sensor 7199993UL
-			ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
-			water_level = ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
 		}
     }
 }
