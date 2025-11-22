@@ -23,13 +23,7 @@ void drivers_init(void){
 	PWM_init(pump_port, pump_pin);
 	visual_init();
 	
-	PWM_init(rgb_r_port, rgb_r_pin);
-	visual_init();
-	
-	PWM_init(rgb_g_port, rgb_g_pin);
-	visual_init();
-	
-	PWM_init(rgb_b_port, rgb_b_pin);
+	PWM_init(red_led_port, red_led_pin);
 	visual_init();
 	
 	TIM_init();
@@ -44,6 +38,10 @@ void peripherals_init(void){
 	visual_init();
 	
 	console_init();
+	visual_init();
+	
+	DDRB |= (1 << water_sensor_pin) | (1 << soil_sensor_pin);
+	DDRH |= (1 << red_led_pin);
 	visual_init();
 	
 	drivers_and_data_initialized = true;
@@ -81,16 +79,17 @@ void visual_init(void){
 		}
 		
 		for (int i = 0; i < 5; i++){
-			//read soil moisture sensor
+			ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
 			_delay_ms(10);
 		}
 		
 		for (int i = 0; i < 5; i++){
-			//read water level
+			ADC_read_voltage(water_sensor_adc_channel, water_sensor_V_ref);
 			_delay_ms(10);
 		}
 		LCD_sendData(0xFF);
 		
+		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);
 		LCD_sendData(0xFF);

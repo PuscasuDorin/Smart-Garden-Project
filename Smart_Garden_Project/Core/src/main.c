@@ -30,8 +30,7 @@ int main(void)
 	float overflow_threshold = 0.5f;
 	//char buffer[16];
 	
-	DDRB |= (1 << water_sensor_pin) | (1 << soil_sensor_pin);
-	DDRH |= (1 << red_led_pin);
+	
 	
     while (1) 
     {

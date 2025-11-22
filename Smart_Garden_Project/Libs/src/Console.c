@@ -22,7 +22,7 @@ static void UI_mode(void);
 static void Sensors_mode(void);
 static void Actuators_mode(void);
 static void lcd_test_mode(void);
-static void rgb_led_test_mode(void);
+//static void rgb_led_test_mode(void);
 
 volatile bool debugging = false;
 static enum CONSOLE_MODES current_mode = MODE_NONE;
@@ -206,6 +206,7 @@ void lcd_test_mode(void){
 	}
 }
 
+/*
 void rgb_led_test_mode(void){
 	uint8_t value = 0;
 	bool red_intensity_selected = false;
@@ -265,4 +266,4 @@ void rgb_led_test_mode(void){
 			}
 		}
 	}
-}
+} */
