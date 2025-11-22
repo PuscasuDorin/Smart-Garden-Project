@@ -1,16 +1,8 @@
-/*
- * SoilMoistureSensor.h
- *
- * Created: 11/7/2025 2:45:58 PM
- *  Author: Dorin
- */ 
-
 
 #ifndef SOILMOISTURESENSOR_H_
 #define SOILMOISTURESENSOR_H_
 
-
-
-
+	float read_soil_sensor(void);
+	void soil_sensor_init(uint8_t channel, float V_ref_param);
 
 #endif /* SOILMOISTURESENSOR_H_ */
