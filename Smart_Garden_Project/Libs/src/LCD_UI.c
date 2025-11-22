@@ -86,7 +86,6 @@ void LCD_UI_UpdateData(void){
 	else if(!overflow){
 		current_mode = MODE_ACTIVE;
 	}
-	*/
 	if(UI_water_level_cycles == 0 && UI_water_level < 0.5){
 		current_mode = MODE_NONE;
 		no_water = true;
@@ -97,6 +96,8 @@ void LCD_UI_UpdateData(void){
 		current_mode = MODE_ACTIVE;
 		page_number = 0;
 	}
+	*/
+	
 }
 
 void LCD_UI_MainScreen(uint8_t page){

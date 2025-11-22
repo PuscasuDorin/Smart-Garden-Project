@@ -84,7 +84,7 @@ int main(void)
 			ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
 			soil_moisture = ADC_read_voltage(soil_sensor_adc_channel, soil_sensor_V_ref);
 			
-			if (soil_moisture <= dry_soil_threshold && !overflow){
+			if (soil_moisture <= dry_soil_threshold && !overflowb){
 				if(temperature_celsius >= high_temp_threshold){
 					if(light_procent <= darkness_threshold){
 						now_watering_time = system_time_ms();

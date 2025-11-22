@@ -25,15 +25,15 @@
 	#define water_sensor_adc_channel 3
 	#define water_sensor_V_ref 5.0f
 	
-	#define overflow_sensor_adc_channel 14
-	#define overflow_sensor_V_ref 5.0f
+	//#define overflow_sensor_adc_channel 14
+	//#define overflow_sensor_V_ref 5.0f
 	
-	#define rgb_r_port &PORTH
-	#define rgb_r_pin PH3
-	#define rgb_g_port &PORTH
-	#define rgb_g_pin PH4
-	#define rgb_b_port &PORTH
-	#define rgb_b_pin PH5
+	//#define rgb_r_port &PORTH
+	//#define rgb_r_pin PH3
+	//#define rgb_g_port &PORTH
+	//#define rgb_g_pin PH4
+	//#define rgb_b_port &PORTH
+	//#define rgb_b_pin PH5
 	
 	#define BUTTONS_DEBOUNCE_MS 400
 	#define up_b_port &PORTB
