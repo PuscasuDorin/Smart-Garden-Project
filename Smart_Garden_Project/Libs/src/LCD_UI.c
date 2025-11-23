@@ -1,6 +1,6 @@
 #include <avr/io.h>
 #include "LCD_UI.h"
-#include "LCD_TEST.h"
+#include "LCD.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include "config.h"

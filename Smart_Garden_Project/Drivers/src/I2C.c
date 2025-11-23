@@ -8,24 +8,24 @@ void I2C_init(void){
 	TWBR = ((F_CPU / scl_frequency) - 16) / (2 * (1 << (2 * twps_val)));
 }
 
-void I2C_Start(void){
+void I2C_start(void){
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
 	
 	while (!(TWCR & (1<<TWINT)));
 }
 
-void I2C_Stop(void){
+void I2C_stop(void){
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
 }
 
-void I2C_Write(uint8_t data){
+void I2C_write(uint8_t data){
 	TWDR = data;
 	TWCR = (1<<TWINT) | (1<<TWEN);
 	
 	while (!(TWCR & (1<<TWINT)));
 }
 
-void I2C_LCD_Write(uint8_t lcd_address, uint8_t control_byte ,uint8_t data){
+void I2C_LCD_write(uint8_t lcd_address, uint8_t control_byte ,uint8_t data){
 	I2C_Start();
 	I2C_Write(lcd_address << 1);
 	I2C_Write(control_byte);

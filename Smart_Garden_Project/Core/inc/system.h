@@ -14,7 +14,7 @@
 	//Peripherals
 	#include "LightSensor.h"
 	#include "LM35.h"
-	#include "LCD_TEST.h"
+	#include "LCD.h"
 	#include "SoilMoistureSensor.h"
 	#include "WaterLevelSensor.h"
 	

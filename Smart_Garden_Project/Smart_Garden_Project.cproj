@@ -180,7 +180,7 @@
     <Compile Include="Libs\inc\console.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Libs\inc\LCD_TEST.h">
+    <Compile Include="Libs\inc\LCD.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Libs\inc\LCD_UI.h">
@@ -201,7 +201,7 @@
     <Compile Include="Libs\src\console.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Libs\src\LCD_TEST.c">
+    <Compile Include="Libs\src\LCD.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Libs\src\LCD_UI.c">

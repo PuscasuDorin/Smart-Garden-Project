@@ -11,11 +11,6 @@
 
 #define LCD_ADDR 0x27
 
-void I2C_Init(void);
-void I2C_start(uint8_t address);
-void I2C_write(uint8_t data);
-void I2C_stop(void);
-
 void LCD_init(void);
 void LCD_sendCommand(uint8_t cmd);
 void LCD_sendData(uint8_t data);

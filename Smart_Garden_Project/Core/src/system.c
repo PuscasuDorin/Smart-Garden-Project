@@ -69,7 +69,7 @@ void drivers_and_peripherals_init(void){
 
 void visual_init(void){
 	if(init){
-		I2C_Init();
+		I2C_init();
 		LCD_init();
 		
 		LCD_gotoxy(1,0);

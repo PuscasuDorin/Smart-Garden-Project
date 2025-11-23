@@ -1,8 +1,9 @@
 #include <avr/io.h>
-#include "LCD_TEST.h"
+#include "LCD.h"
 
 #include <stdint.h>
 #include <stdlib.h>
+#include "I2C.h"
 
 #define LCD_BACKLIGHT 0x08
 #define LCD_ENABLE 0x04
@@ -10,34 +11,6 @@
 static uint8_t lcd_backlight = LCD_BACKLIGHT;
 
 static void LCD_send(uint8_t data, uint8_t mode);
-
-void I2C_Init(void)
-{
-	TWSR = 0x00;
-	TWBR = 72; // ~100kHz la 16MHz
-}
-
-void I2C_start(uint8_t address)
-{
-	TWCR = (1<<TWSTA)|(1<<TWEN)|(1<<TWINT);
-	while(!(TWCR & (1<<TWINT)));
-	TWDR = address;
-	TWCR = (1<<TWEN)|(1<<TWINT);
-	while(!(TWCR & (1<<TWINT)));
-}
-
-void I2C_write(uint8_t data)
-{
-	TWDR = data;
-	TWCR = (1<<TWEN)|(1<<TWINT);
-	while(!(TWCR & (1<<TWINT)));
-}
-
-void I2C_stop(void)
-{
-	TWCR = (1<<TWSTO)|(1<<TWINT)|(1<<TWEN);
-	_delay_ms(2);
-}
 
 static void LCD_pulseEnable(uint8_t data)
 {
@@ -52,7 +25,8 @@ static void LCD_send(uint8_t data, uint8_t mode)
 	uint8_t highNib = data & 0xF0;
 	uint8_t lowNib = (data << 4) & 0xF0;
 
-	I2C_start(LCD_ADDR << 1);
+	I2C_start();
+	I2C_write(LCD_ADDR << 1);
 	I2C_write(highNib | mode | lcd_backlight);
 	LCD_pulseEnable(highNib | mode);
 	I2C_write(lowNib | mode | lcd_backlight);
@@ -109,7 +83,8 @@ void LCD_backlightOn(void)
 {
 	lcd_backlight = LCD_BACKLIGHT;
 	
-	I2C_start(LCD_ADDR << 1);
+	I2C_start();
+	I2C_write(LCD_ADDR << 1);
 	I2C_write(lcd_backlight); // send just the backlight bit
 	I2C_stop();
 }
@@ -118,7 +93,8 @@ void LCD_backlightOff(void)
 {
 	lcd_backlight = 0x00;
 	
-	I2C_start(LCD_ADDR << 1);
+	I2C_start();
+	I2C_write(LCD_ADDR << 1);
 	I2C_write(lcd_backlight); // turn it off physically
 	I2C_stop();
 }

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "console.h"
 #include "config.h"
-#include "LCD_TEST.h"
+#include "LCD.h"
 #include "system.h"
 #include <avr/interrupt.h>
 #include <stdio.h>
