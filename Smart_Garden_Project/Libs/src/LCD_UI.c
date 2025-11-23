@@ -69,7 +69,7 @@ void LCD_UI_UpdateData(void){
 			
 		case MODE_STANDBY:
 			//if(current_mode == MODE_STANDBY)
-			page_number = 0;
+			//page_number = 0;
 			LCD_backlightOff();
 			wake_lcd_on_button_press();
 			break;

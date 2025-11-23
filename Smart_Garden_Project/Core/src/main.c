@@ -23,7 +23,7 @@ int main(void)
 	bool watering = false;
 	uint16_t watering_time = 4001;
 	uint32_t now_watering_time = 0;
-	uint16_t dry_soil_threshold = 2.9f;
+	uint16_t dry_soil_threshold = 1.5f;
 	uint16_t high_temp_threshold = 26;
 	uint16_t strong_light_threshold = 90;
 	//uint16_t darkness_threshold = 10;
