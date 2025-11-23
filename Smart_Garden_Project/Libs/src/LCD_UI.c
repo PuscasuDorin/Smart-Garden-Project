@@ -7,6 +7,7 @@
 #include "Buttons.h"
 #include "TIM.h"
 #include "PWM.h"
+#include "WaterLevelSensor.h"
 	
 enum LCD_MODES{
 	MODE_NONE = 0,
@@ -89,7 +90,7 @@ void LCD_UI_UpdateData(void){
 	}
 	*/
 	
-	if(UI_water_level_cycles == 0 && UI_water_level < 0.2){
+	if(UI_water_level_cycles == 0 && UI_water_level < 0.3){
 		UI_water_level = read_water_sensor();
 		current_mode = MODE_NONE;
 		no_water = true;
@@ -97,7 +98,7 @@ void LCD_UI_UpdateData(void){
 		wake_lcd_on_button_press();
 		LCD_UI_MainScreen(4);
 	}
-	else if(UI_water_level >= 0.2 && current_mode != MODE_ACTIVE && current_mode != MODE_STANDBY){	
+	else if(UI_water_level >= 0.3 && current_mode != MODE_ACTIVE && current_mode != MODE_STANDBY){	
 		no_water = false;
 		set_LED_Brightness(red_led_port, red_led_pin, 0);
 		current_mode = MODE_ACTIVE;

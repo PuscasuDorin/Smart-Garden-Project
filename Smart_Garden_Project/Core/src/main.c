@@ -52,7 +52,7 @@ int main(void)
 				set_LED_Brightness(red_led_port, red_led_pin, 0);
 				start_pump(watering);
 				
-				if(water_level >= 0.2){
+				if(water_level >= 0.3){
 					water_level_cycles++;
 				}
 				else if(new_water_level_cycles > 0){
@@ -60,7 +60,7 @@ int main(void)
 				}
 			}
 			
-			if(water_level < 0.2 && new_water_level_cycles == 0){
+			if(water_level < 0.3 && new_water_level_cycles == 0){
 				new_water_level_cycles = water_level_cycles * 1.5;
 				water_level_cycles = 0;
 			}
