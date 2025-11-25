@@ -19,6 +19,7 @@ static float UI_temperature_celsius = 0.0f;
 static float UI_light_procent = 0.0f;
 static float UI_soil_moisture = 0.0f;
 static float UI_water_level = 0.0f;
+static float UI_instant_water_level = 1;
 static uint8_t UI_water_level_cycles;
 static uint8_t page_number = 0;
 static uint8_t length_of_floats = 0;
@@ -91,8 +92,8 @@ void LCD_UI_UpdateData(void){
 	*/
 	
 	if(UI_water_level_cycles == 0 && UI_water_level < 0.3){
-		UI_water_level = read_water_sensor();
 		current_mode = MODE_NONE;
+		start_pump(0);
 		no_water = true;
 		set_LED_Brightness(red_led_port, red_led_pin, 180);
 		wake_lcd_on_button_press();
