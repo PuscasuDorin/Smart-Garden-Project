@@ -75,26 +75,26 @@ int main(void)
 			LCD_UI_UpdateData();
 		}
 		
-		if(global_time % 10007 == 0){
+		if(global_time % 29993 == 0){
 			//30s for Temperature Sensor 29993
 			read_LM35_Temp();
 			read_LM35_Temp();
 			temperature_celsius = read_LM35_Temp();
 		}
 		
-		if(global_time % 11971  == 0){
-			//1min for Light Sensor 59993
+		if(global_time % 59993UL == 0){
+			//1min for Light Sensor 59993UL
 			read_LightSensor_Percentages();
 			read_LightSensor_Percentages();
 			light_procent = read_LightSensor_Percentages();
 		}
 		
-		if(global_time % 20011 == 0){
+		if(global_time % 6300007UL == 0){
 			//1h 45m for Water Level Sensor 6300007UL
 			water_level = read_water_sensor();
 		}
 		
-		if(global_time % 25013 == 0){
+		if(global_time % 7199993UL == 0){
 			//2h for Soil Moisture Sensor 7199993UL
 			soil_moisture = read_soil_sensor();
 			
